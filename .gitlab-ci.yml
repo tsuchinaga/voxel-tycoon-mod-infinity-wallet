@@ -1,0 +1,18 @@
+image: mcr.microsoft.com/dotnet/sdk
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - dotnet build ./InfinityWallet
+    - mkdir infinity-wallet
+    - cp mod.json infinity-wallet/
+    - cp InfinityWallet/bin/Debug/netstandard2.1/InfinityWallet.dll infinity-wallet/
+  artifacts:
+    name: "infinity-wallet"
+    paths:
+      - infinity-wallet
+  only:
+    - master
